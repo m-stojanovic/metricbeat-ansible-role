@@ -31,8 +31,11 @@ This section should list any major frameworks that you built your project using.
 
 ## Getting Started
 
+To install and configure metricbeat run:
 ansible-playbook -i {{ your_inventory_file }} {{ your_playbook }} tags=debian,config
 
+To disable module run:
+ansible-playbook -i {{ your_inventory_file }} {{ your_playbook }} tags=disable_module --extra-vars "module_name=docker"
 
 ### Prerequisites
 
