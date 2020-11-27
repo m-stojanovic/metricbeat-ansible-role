@@ -1,0 +1,5 @@
+---
+- name: Stop metricbeat service
+  service:
+    name: metricbeat
+    state: stopped
