@@ -1,0 +1,70 @@
+---
+# Transfer SSL certificates 
+- name: Put SSL certificates on remote host
+  copy:
+    src: "roles/metricbeat/templates/ssl"  
+    dest: "/etc/metricbeat/"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+# Set conditions
+- name: Check if docker is installed on remote host
+  shell: 'systemctl status docker | grep -oh "active"'
+  register: docker_status
+  ignore_errors: yes
+
+- name: Set variable docker
+  set_fact: 
+    docker: "{{ docker_status.stdout }}"
+  when: docker_status.stderr.find('service could not be found') == -1
+
+- name: Set variable debian
+  set_fact:
+    debian: defined
+  when: ansible_os_family == 'Debian'
+
+- name: Set variable redhat
+  set_fact:
+    redhat: defined
+  when: ansible_os_family == 'RedHat'
+ 
+# Create metricbeat.yml on remote host
+- name: Create metricbeat.yml
+  template:
+    src: metricbeat.conf.j2
+    dest: /etc/metricbeat/metricbeat.yml
+
+- name: Enable Docker module
+  template:
+    src: docker.module.conf.j2
+    dest: /etc/metricbeat/modules.d/docker.yml
+  when: docker_status.stderr.find('service could not be found') == -1
+
+- name: Remove disabled Docker module
+  file:
+    path: "/etc/metricbeat/modules.d/docker.yml.disabled"
+    state: absent
+  when: docker_status.stderr.find('service could not be found') == -1
+
+- name: Enable AWS Billing module
+  template:
+    src: aws.module.conf.j2
+    dest: /etc/metricbeat/modules.d/aws.yml
+  when: ansible_hostname == "dev-webserver"
+
+- name: Remove disabled AWS module
+  file:
+    path: /etc/metricbeat/modules.d/aws.yml.disabled
+    state: absent
+  when: ansible_hostname == "dev-webserver"
+
+- name: Create metricbeat.yml
+  template:
+    src: metricbeat.conf.j2
+    dest: /etc/metricbeat/metricbeat.yml
+
+# Restart filebeat service
+- name: restart metricbeat
+  service:
+    name: metricbeat
+    state: restarted
