@@ -12,11 +12,8 @@
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
-* [License](#license)
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
@@ -40,8 +37,6 @@ ansible-playbook -i {{ your_inventory_file }} {{ your_playbook }} tags=debian,co
 ### Prerequisites
 
 Ansible version 2.9.0 +
-
-
 
 <!-- ROADMAP -->
 ## Roadmap
