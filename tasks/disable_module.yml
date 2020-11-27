@@ -1,0 +1,8 @@
+---
+- name: Disable {{ module_name }} module
+  command: "mv /etc/metricbeat/modules.d/{{ module_name }}.yml /etc/metricbeat/modules.d/{{ module_name }}.yml.disabled"
+
+- name: Restart metricbeat service
+  service:
+    name: metricbeat
+    state: restarted
