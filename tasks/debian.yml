@@ -1,0 +1,34 @@
+---
+- name: Ensure required dependencies are present. - Debian
+  apt:
+    name:
+      - apt-transport-https
+      - gnupg2
+    state: present
+
+- name: Add elastic GPG key - Debian
+  apt_key:
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    state: "present"
+
+- name: Add metricbeat repository - Debian
+  apt_repository:
+    repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+    state: "present"
+    update_cache: yes
+
+- name: Update repo and cache - Debian
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: install metricbeat - Debian
+  apt:
+    name: "{{ metricbeat_version }}"
+    state: "present"
+
+- name: Start and enable metricbeat - Debian
+  service:
+    name: metricbeat
+    state: started
+    enabled: true
