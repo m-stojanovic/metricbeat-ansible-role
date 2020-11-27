@@ -1,0 +1,18 @@
+---
+- include: redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: config.yml
+  tags: [config]
+
+- import_tasks: stop.yml
+  tags: [stop, never]
+
+- import_tasks: restart.yml
+  tags: [restart, never]
+
+- import_tasks: disable.yml
+  tags: [disable, never]
