@@ -1,0 +1,65 @@
+# =========================== Modules configuration ============================
+
+metricbeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: false
+
+  # Period on which files under path should be checked for changes
+  #reload.period: 10s
+
+# ======================= Elasticsearch template setting =======================
+
+setup.template.settings:
+  index.number_of_shards: 1
+  index.codec: best_compression
+  #_source.enabled: false
+
+# ================================= Dashboards =================================
+
+#setup.dashboards.enabled: false
+#setup.dashboards.url:
+
+# =================================== Kibana ===================================
+
+# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+# This requires a Kibana endpoint configuration.
+setup.kibana:
+  host: "https://elastic-stack.devopslearning.xyz:5601"
+  kibana.ssl.enabled: true
+  kibana.ssl.certificate_authorities: ["/etc/ssl/certs/ca-bundle.crt"]
+  kibana.ssl.certificate: "/etc/metricbeat/ssl/fullchain1.pem"
+  kibana.ssl.key: "/etc/metricbeat/ssl/privkey1.pem"
+
+# ---------------------------- Elasticsearch Output ----------------------------
+output.elasticsearch:
+  hosts: ["https://elastic-stack.devopslearning.rs:9200"]
+  elasticsearch.ssl.certificate_authorities: ["/etc/ssl/certs/ca-bundle.crt"]
+  elasticsearch.ssl.certificate: "/etc/metricbeat/ssl/fullchain1.pem"
+  elasticsearch.ssl.key: "/etc/metricbeat/ssl/privkey1.pem"
+  #protocol: "https"
+
+  #api_key: "id:api_key"
+  username: "{{ metricbeat_username }}"
+  password: "{{ metricbeat_password }}"
+
+# ================================= Processors =================================
+
+processors:
+{% if docker is defined %}
+  - add_docker_metadata: ~
+{% endif %}
+
+# ================================== Logging ===================================
+
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /var/log/metricbeat
+  name: metricbeat
+  keepfiles: 7
+  permissions: 0644
