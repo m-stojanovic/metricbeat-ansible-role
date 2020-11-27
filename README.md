@@ -1,0 +1,1 @@
+# metricbeat-ansible-role
