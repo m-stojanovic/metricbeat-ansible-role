@@ -1,0 +1,43 @@
+# Belgrade Account
+- module: aws 
+  period: 12h 
+  metricsets:
+   - billing
+  regions:
+   - us-east-1
+  access_key_id: '{{ aws_access_key_belgrade_acc_mb }}'
+  secret_access_key: '{{ aws_secret_key_belgrade_acc_mb }}'
+  credential_profile_name: metricbeat
+
+# Dev Account
+- module: aws 
+  period: 12h 
+  metricsets:
+   - billing
+  regions:
+   - us-east-1
+  access_key_id: '{{ aws_access_key_dev_acc_mb }}'
+  secret_access_key: '{{ aws_secret_key_dev_acc_mb }}'
+  credential_profile_name: metricbeat
+
+# Prod01 Account
+- module: aws 
+  period: 12h 
+  metricsets:
+   - billing
+  regions:
+   - us-east-1
+  access_key_id: '{{ aws_access_key_prod01_acc_mb }}'
+  secret_access_key: '{{ aws_secret_key_prod01_acc_mb }}'
+  credential_profile_name: metricbeat
+
+# Prod02 Account
+- module: aws 
+  period: 12h 
+  metricsets:
+   - billing                                                                                                                                                                                                        
+  regions:
+   - us-east-1
+  access_key_id: '{{ aws_access_key_prod02_acc_mb }}'
+  secret_access_key: '{{ aws_secret_key_prod02_acc_mb }}'
+  credential_profile_name: metricbeat
