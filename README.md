@@ -8,7 +8,6 @@
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 
 
@@ -18,7 +17,6 @@
 Simple metricbeat ansible role that deploys metricbeat on both Redhat and Debian systems.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 * [Ansible](https://ansible.com)
 * [Yaml](https://yaml.com)
 
@@ -60,21 +58,6 @@ Milos Stojanovic - [@linkedin](https://www.linkedin.com/in/infomilosstojanovic/)
 
 Project Link: [https://github.com/m-stojanovic/metricbeat-ansible-role](https://github.com/m-stojanovic/metricbeat-ansible-role)
 
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
